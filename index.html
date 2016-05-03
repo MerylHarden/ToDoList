@@ -1,24 +1,53 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" ng-app"ToDo">
 
-	<!--
-	Meta Information
-	-->
-	<head>
+<head>
 
-		<!--Any meta tags to describe metadata about this document-->
-		<meta charset="UTF-8" />
-		<meta name="author" content="Kenaniah Cerny" />
-		<meta name="description" content="A reference guide to HTML" />
+  <meta charset="UTF-8">
+  <title>todo</title>
+  <style>
+  .done{text-decoration: line-through;color:#ccc;}
+  </style>
+</head>
 
-		<!--The document's title, which shows up in the browser tab-->
-		<title>Most of HTML in a nutshell</title>
+<body>
+	<div ng-controller="todoController">
+		<form name="frm" ng-submit="addTodo()">
+			<input type="text" name="newtodo" ng-model="newTodo" required />
+			<button ng-disabled="frm.$invalid">Go</button>
+		</form>
+		<button ng-click="clearCompleted()">Clear Completed</button>
+		<ul>
+			<li ng-repeat="todo in todos">
+				<input type="checkbox" ng-model="todo.done" />
+				<span ng-class="{'done':todo.done}">{{todo.title}}</span>
+
+			</li>
+			
+		</ul>
+	</div>
 		
-		<!--Style sheets-->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
+<script src="bower_components/angular/angular.min.js"></script>
 
-		<!--Javascript to be loaded-->
-		<!--<script src="js/harlemshake.js"></script>-->
+<script>
 		
-	</head>
+angular.module('ToDo',[]). //no dependancies
+controller('todoController',['$scope',function($scope){
+	$scope.todos = [
+		{'title': 'Build a todo app','done':false}
+	];
+
+	$scope.addTodo = function(){
+		$scope.todos.push[{'title':$scope.newTodo,'done':false}]
+	}
+	$scope.clearCompleted = function(){}
+		}]) //create controller. inject scope and use scope by creating function
+			//create a list of todos as an array, A todo will be an object that needs a title. then we give the title a status of whether or not it's done and in the first case say it is false because we have not built it yet
+			//then we create methods
+
+
+
+</script>
+ 
+</body>
+</html>
